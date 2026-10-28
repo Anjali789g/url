@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shortly — URL Shortener + Analytics
 
-## Getting Started
+A beginner-friendly web app that turns long URLs into short links and later shows click analytics.
 
-First, run the development server:
+**Current status:** Phase 1 — project skeleton only. Shortening, database, Redis, and charts are not built yet.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## What you need on your computer
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- [Node.js 20 or newer](https://nodejs.org) (this also installs `npm`)
+- A free [Supabase](https://supabase.com) account (PostgreSQL in the cloud)
+- A free [Upstash](https://upstash.com) account (Redis in the cloud)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+You do **not** need to install PostgreSQL or Redis on your own machine.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How to run this project (Phase 1)
 
-## Learn More
+1. Open a terminal in this folder.
+2. Install packages (already done if you cloned this after setup):
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   npm install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Copy the example environment file:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   copy .env.example .env.local
+   ```
 
-## Deploy on Vercel
+   On macOS or Linux, use `cp .env.example .env.local`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. You can leave the cloud keys empty for Phase 1. We only need them when we connect the database (Phase 2) and Redis (Phase 5).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+The home page should say **Shorten links. Track clicks.** Click **Dashboard** in the top menu to see the placeholder stats page.
+
+## Useful commands
+
+| Command | What it does |
+|---------|----------------|
+| `npm run dev` | Starts the local website with live reload |
+| `npm run build` | Creates a production build (used later for deploy) |
+| `npm run start` | Serves the production build |
+| `npm run lint` | Checks the code for common mistakes |
+
+## Folder map (simple English)
+
+| Path | What it is |
+|------|------------|
+| `src/app/layout.tsx` | Shared chrome: title, header, and page wrapper |
+| `src/app/page.tsx` | Home page |
+| `src/app/dashboard/page.tsx` | Dashboard placeholder |
+| `src/app/globals.css` | Global colors and Tailwind setup |
+| `.env.example` | List of settings you will fill later (safe to share) |
+| `.env.local` | Your real keys (never share this file) |
+| `package.json` | Project name, scripts, and libraries |
+| `next.config.ts` | Next.js settings |
+
+## Coming next
+
+- Phase 2: Connect Supabase PostgreSQL with Prisma
+- Phase 3: Create short URLs and redirect
+- Phase 4: Real analytics on the dashboard
+- Phase 5: Upstash Redis cache and rate limiting
+- Phase 6: Validation and security
+- Phase 7: Tests
+- Phase 8: Full README, GitHub, and deployment

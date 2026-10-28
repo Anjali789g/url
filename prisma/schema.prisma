@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+  // directUrl is kept for compatibility with the starter setup, but SQLite ignores it.
+  // directUrl = env("DIRECT_URL")
+}
+
+model Link {
+  id          String       @id @default(cuid())
+  shortCode   String       @unique
+  originalUrl String
+  clickCount  Int          @default(0)
+  createdAt   DateTime     @default(now())
+  clicks      ClickEvent[]
+}
+
+model ClickEvent {
+  id        String   @id @default(cuid())
+  linkId    String
+  createdAt DateTime @default(now())
+  link      Link     @relation(fields: [linkId], references: [id], onDelete: Cascade)
+
+  @@index([linkId])
+  @@index([createdAt])
+}
